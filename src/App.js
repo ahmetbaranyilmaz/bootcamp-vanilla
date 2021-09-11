@@ -1,33 +1,34 @@
-import data from "./data";
+import NotesList from "./components/NotesList";
+import {useState} from "react";
+import {nanoid} from "nanoid";
 
 const App = () => {
-  return (
-    <div className="App">
-        <table>
-            <thead>
-                <th>exchangeType</th>
-                <th>exchangeFrom</th>
-                <th>exchangeTo</th>
-                <th>buy</th>
-                <th>sell</th>
-                <th>diff</th>
-            </thead>
-            <tbody>
-                {data.currencies.map((data, index) =>
-                    <tr key={index}>
-                        <td>{data.exchangeType}</td>
-                        <td>{data.exchangeFrom}</td>
-                        <td>{data.exchangeTo}</td>
-                        <td>{data.buy}</td>
-                        <td>{data.sell}</td>
-                        <td>{data.diff}</td>
-                    </tr>
 
-                )}
-            </tbody>
-        </table>
-    </div>
-  );
+    const [notes, setNotes] = useState([]);
+    
+    const addNote = (text) => {
+      const newNote = {
+          id: nanoid(),
+          text: text
+      }
+
+      const newNotes = [...notes, newNote];
+      setNotes(newNotes);
+    };
+
+    const deleteNote = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
+    }
+
+    return (
+        <div className="App">
+            <NotesList
+                notes={notes}
+                handleAddNote={addNote}
+                handleDeleteNote={deleteNote}
+            />
+        </div>
+    )
 }
-
 export default App;
