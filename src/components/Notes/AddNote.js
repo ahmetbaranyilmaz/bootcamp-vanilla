@@ -1,14 +1,17 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {NoteContext} from "./NoteContext";
 
-const AddNote = ({handleAddNote}) => {
+const AddNote = () => {
     const [noteText, setNoteText] = useState("");
+
+    const props = useContext(NoteContext);
 
     const handleChange = (event) => {
       setNoteText(event.target.value);
     };
     
     const handleSaveClick = () => {
-      handleAddNote(noteText);
+      props.addNote(noteText);
       setNoteText("");
     };
 
@@ -19,7 +22,8 @@ const AddNote = ({handleAddNote}) => {
                 cols="10"
                 placeholder="enter note"
                 value={noteText}
-                onChange={handleChange}>
+                onChange={handleChange}
+            >
             </textarea>
             <div className="save">
                 <button className="save-button" onClick={handleSaveClick}>Save</button>

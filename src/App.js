@@ -1,9 +1,8 @@
 import NotesList from "./components/Notes/NotesList";
-import {useState} from "react";
 import {nanoid} from "nanoid";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NoteDetail from "./components/Note/NoteDetail";
-
+import {NoteContext} from "./components/Notes/NoteContext";
 
 const App = () => {
 
@@ -27,20 +26,18 @@ const App = () => {
     }
 
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/">
-                    <NotesList
-                        notes={notes}
-                        handleAddNote={addNote}
-                        handleDeleteNote={deleteNote}
-                    />
-                </Route>
-                <Route exact path='/posts/:id'>
-                        <NoteDetail notes={ notes }/>
-                </Route>
-            </Switch>
-        </Router>
+        <NoteContext.Provider value={{notes, addNote, deleteNote}}>
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                            <NotesList />
+                    </Route>
+                    <Route exact path='/posts/:id'>
+                            <NoteDetail />
+                    </Route>
+                </Switch>
+            </Router>
+        </NoteContext.Provider>
     )
 }
 

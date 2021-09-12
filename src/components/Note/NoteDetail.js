@@ -1,8 +1,12 @@
 import {Link, useParams} from "react-router-dom";
+import {useContext} from "react";
+import {NoteContext} from "../Notes/NoteContext";
 
-const NoteDetail = ({ notes }) => {
+const NoteDetail = () => {
+    const props = useContext(NoteContext);
+
     let {id} = useParams();
-    const text = notes.filter((note) => note.id === id)[0].text
+    const text = props.notes.filter((note) => note.id === id)[0].text
     return (
         <>
             <span>{text}</span>
