@@ -1,4 +1,5 @@
 import NotesList from "./components/Notes/NotesList";
+import {useState} from "react";
 import {nanoid} from "nanoid";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NoteDetail from "./components/Note/NoteDetail";
