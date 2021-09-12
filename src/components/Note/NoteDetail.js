@@ -2,13 +2,11 @@ import {Link, useParams} from "react-router-dom";
 
 const NoteDetail = ({ notes }) => {
     let {id} = useParams();
-    const text = notes.filter((note) => note.id === id)
-    console.log(text);
-    console.log(text[0].text);
+    const text = notes.filter((note) => note.id === id)[0].text
     return (
         <>
-            <span>{text[0].text}</span>
-            <Link to={`/`}>Back</Link>
+            <span>{text}</span>
+            <Link to={`/`}><button>Back</button></Link>
         </>
     )
 }
